@@ -199,10 +199,10 @@ public class Apps extends javax.swing.JFrame {
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
          String input = InputTextField.getText();
     try {
-        RDP parser = new RDP(input, this); // Pass 'this' to RDP constructor for callback
+        RDP parser = new RDP(input); // Pass 'this' to RDP constructor for callback
         parser.parse();
     } catch (RuntimeException e) {
-        OutputArea.append("Result: Rejected.\n"); // Handle rejection case
+         OutputArea.append("Result: " + e.getMessage() + "\n"); // Handle rejection case
     }
     }//GEN-LAST:event_submitButtonActionPerformed
 

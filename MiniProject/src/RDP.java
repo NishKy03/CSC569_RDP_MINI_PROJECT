@@ -1,130 +1,110 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author U S E R
- */
 import java.io.*;
+
 public class RDP {
-    int inp;
-    int var = 256;
-    public static void main(String[] args) throws IOException {
-    System.out.print("Please enter an input string : ");
-    InputStreamReader stdin = new InputStreamReader(System.in);
-    RDP rdp = new RDP();
-    rdp.parse();
+    char inp;
+    String input;
+    int index;
+    final int VAR = 'a'; // Assume 'var' represents the character 'a' for simplicity
+
+    // Constructor to accept input string
+    RDP(String input) {
+        this.input = input;
+        this.index = 0;
+        this.inp = input.charAt(index); // Initialize the first character
     }
 
-    RDP(String input, Apps aThis) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private RDP() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     void parse() {
-        inp = getInp();
-        if (inp == '\r') // end marker, computer read the end marker as "\r"
-        {
-            accept(); // if the string reached the end marker without reject, accept the string
+        Expr();
+        if (index == input.length()) { // End of string marker
+            accept(); // If the string reached the end without rejection, accept the string
         } else {
-            reject(); // if not found end marker, reject the string
+            reject(); // If not found end marker, reject the string
         }
     }
+
     void Expr() {
-        if (inp == '(' || inp == var) // apply rule 1
-        {
+        if (inp == '(' || inp == VAR) { // Apply rule 1
             Term();
             Elist();
-        } // end rule 1
-        else {
+        } else {
             reject();
         }
     }
+
     void Elist() {
-        if (inp == '+') // apply rule 2
-        {
-            getInp();
+        if (inp == '+') { // Apply rule 2
+            inp = getInp();
             Term();
             Elist();
-        } // end rule 2
-        else if (inp == '-') { //apply rule 9
-            getInp();
+        } else if (inp == '-') { // Apply rule 9
+            inp = getInp();
             Term();
             Elist();
-        } else if (inp == ')' || inp == 'N') ; // apply rule 3
-        else {
-            reject();
-       }
-   }
-    void Term() {
-        if (inp == '(' || inp == var) // apply rule 4
-       {
-            Factor();
-            Tlist();
-        } // end rule 4
-        else {
-            reject();
-       }
-    }
-    void Tlist() {
-        if (inp == '*') // apply rule 5
-        {
-            getInp();
-            Factor();
-            Tlist();
-        } // end rule 5
-        else if (inp == '/') //apply rule 10
-        {
-            getInp();
-            Factor();
-            Tlist();
-        } else if (inp == '+' || inp == ')' || inp == 'N'); // apply rule 6
-        else {
+        } else if (inp == ')' || index == input.length()) {
+            // Apply rule 3: epsilon production, do nothing
+        } else {
             reject();
         }
     }
+
+    void Term() {
+        if (inp == '(' || inp == VAR) { // Apply rule 4
+            Factor();
+            Tlist();
+        } else {
+            reject();
+        }
+    }
+
+    void Tlist() {
+        if (inp == '*') { // Apply rule 5
+            inp = getInp();
+            Factor();
+            Tlist();
+        } else if (inp == '/') { // Apply rule 10
+            inp = getInp();
+            Factor();
+            Tlist();
+        } else if (inp == '+' || inp == '-' || inp == ')' || index == input.length()) {
+            // Apply rule 6: epsilon production, do nothing
+        } else {
+            reject();
+        }
+    }
+
     void Factor() {
-        if (inp == '(') // apply rule 7
-        {
-            getInp();
+        if (inp == '(') { // Apply rule 7
+            inp = getInp();
             Expr();
             if (inp == ')') {
-                getInp();
+                inp = getInp();
             } else {
                 reject();
             }
-        } // end rule 7
-        else if (inp == var) {
-            getInp(); // apply rule 8
+        } else if (inp == VAR) { // Apply rule 8
+            inp = getInp();
         } else {
             reject();
         }
     }
-    // method for print Accept message
-    void accept() // Accept the input
-    {
-        System.out.println("Result: Accepted.");
+
+    // Method for printing Accept message
+    void accept() {
+        throw new RuntimeException("Accepted"); // Use exception to communicate result
     }
-    // method for print Reject message
-    void reject() // Reject the input
-    {
-        System.out.println("Result : Rejected.");
-        System.exit(0); // terminate parser
+
+    // Method for printing Reject message
+    void reject() {
+        throw new RuntimeException("Rejected"); // Use exception to communicate result
     }
-    // method for reading the input string character
+
+    // Method for reading the next character of the input string
     char getInp() {
-        try {
-            return (char) System.in.read();
-        } catch (IOException errormsg) {
-            System.out.println("IO error " + errormsg);
+        index++;
+        if (index < input.length()) {
+            return input.charAt(index);
+        } else {
+            return '\0'; // End of string
         }
-        return '#'; // must return a char
     }
 }
-
-    
