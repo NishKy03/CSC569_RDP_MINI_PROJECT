@@ -8,7 +8,7 @@ class RDP {
     }
 
     public static void main(String[] args) {
-        RDP parser = new RDP("your_input_here");
+        RDP parser = new RDP("var");
         try {
             parser.parse();
             System.out.println("Input accepted by parser.");

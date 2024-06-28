@@ -1,21 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/**
- *
- * @author U S E R
- */
 import javax.swing.*;
 import java.awt.event.*;
+
 public class Apps extends javax.swing.JFrame {
 
-    
     public Apps() {
         initComponents();
-        
+
     }
 
     /**
@@ -43,12 +34,13 @@ public class Apps extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(240, 255, 239));
 
-        Based.setBackground(new java.awt.Color(255, 255, 255));
+        Based.setBackground(new java.awt.Color(153, 153, 255));
         Based.setToolTipText("");
 
         InputFieldPanel.setBackground(new java.awt.Color(255, 255, 255));
         InputFieldPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        InputTextField.setBackground(new java.awt.Color(255, 255, 204));
         InputTextField.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         InputTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -64,12 +56,13 @@ public class Apps extends javax.swing.JFrame {
         );
         InputFieldPanelLayout.setVerticalGroup(
             InputFieldPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(InputTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+            .addComponent(InputTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         OutputFieldPanel.setBackground(new java.awt.Color(255, 255, 255));
         OutputFieldPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        OutputArea.setBackground(new java.awt.Color(255, 255, 204));
         OutputArea.setColumns(20);
         OutputArea.setRows(5);
         OutputArea.setText("Your Grammar Result is:\n");
@@ -92,11 +85,11 @@ public class Apps extends javax.swing.JFrame {
         EnterLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         EnterLabel.setText("ENTER:");
 
-        submitButton.setBackground(new java.awt.Color(63, 159, 255));
+        submitButton.setBackground(new java.awt.Color(153, 153, 255));
         submitButton.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
         submitButton.setForeground(new java.awt.Color(51, 51, 51));
         submitButton.setText("SUBMIT");
-        submitButton.setBorder(null);
+        submitButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         submitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 submitButtonActionPerformed(evt);
@@ -116,7 +109,7 @@ public class Apps extends javax.swing.JFrame {
                 .addGroup(BasedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(BasedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(InputFieldPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(OutputFieldPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(OutputFieldPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(295, Short.MAX_VALUE))
         );
@@ -125,21 +118,21 @@ public class Apps extends javax.swing.JFrame {
             .addGroup(BasedLayout.createSequentialGroup()
                 .addGap(70, 70, 70)
                 .addGroup(BasedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(InputFieldPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(EnterLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(EnterLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(InputFieldPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(BasedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ResultLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(OutputFieldPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(OutputFieldPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ResultLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(85, Short.MAX_VALUE))
         );
 
         MenuBar.setBackground(new java.awt.Color(0, 0, 0));
         MenuBar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        closeButton.setBackground(new java.awt.Color(204, 204, 204));
+        closeButton.setBackground(new java.awt.Color(255, 153, 153));
         closeButton.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         closeButton.setText("X");
         closeButton.addActionListener(new java.awt.event.ActionListener() {
@@ -148,7 +141,7 @@ public class Apps extends javax.swing.JFrame {
             }
         });
 
-        TITLELABEL.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        TITLELABEL.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         TITLELABEL.setForeground(new java.awt.Color(255, 255, 255));
         TITLELABEL.setText("PARSER PROJECT");
 
@@ -189,7 +182,7 @@ public class Apps extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
-      System.exit(0);
+        System.exit(0);
     }//GEN-LAST:event_closeButtonActionPerformed
 
     private void InputTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InputTextFieldActionPerformed
@@ -197,13 +190,13 @@ public class Apps extends javax.swing.JFrame {
     }//GEN-LAST:event_InputTextFieldActionPerformed
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
-         String input = InputTextField.getText();
-    try {
-        RDP parser = new RDP(input); // Pass 'this' to RDP constructor for callback
-        parser.parse();
-    } catch (RuntimeException e) {
-         OutputArea.append("Result: " + e.getMessage() + "\n"); // Handle rejection case
-    }
+        String input = InputTextField.getText();
+        try {
+            RDP parser = new RDP(input); // Pass 'this' to RDP constructor for callback
+            parser.parse();
+        } catch (RuntimeException e) {
+            OutputArea.append("Result: " + e.getMessage() + "\n"); // Handle rejection case
+        }
     }//GEN-LAST:event_submitButtonActionPerformed
 
     /**
