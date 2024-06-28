@@ -1,110 +1,84 @@
-import java.io.*;
+class RDP {
+    String inp; 
+    int index;    
 
-public class RDP {
-    char inp;
-    String input;
-    int index;
-    final int VAR = 'a'; // Assume 'var' represents the character 'a' for simplicity
+    public RDP (String inp){
+        this.inp=inp;
+        this.index=0;
+    }
 
-    // Constructor to accept input string
-    RDP(String input) {
-        this.input = input;
-        this.index = 0;
-        this.inp = input.charAt(index); // Initialize the first character
+    public static void main(String[] args) {
+        RDP parser = new RDP("your_input_here");
+        try {
+            parser.parse();
+            System.out.println("Input accepted by parser.");
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     void parse() {
-        Expr();
-        if (index == input.length()) { // End of string marker
-            accept(); // If the string reached the end without rejection, accept the string
+        S(); 
+        if (index == inp.length()) {
+            accept(); 
         } else {
-            reject(); // If not found end marker, reject the string
+            reject(); 
+        }
+    }
+
+    void S() {
+        Expr();
+    }
+
+    void Elist() {
+        if (index < inp.length() && (inp.charAt(index) == '+' || inp.charAt(index) == '-')) {
+            index++;
+            Term();
+            Elist();
         }
     }
 
     void Expr() {
-        if (inp == '(' || inp == VAR) { // Apply rule 1
-            Term();
-            Elist();
-        } else {
-            reject();
-        }
-    }
-
-    void Elist() {
-        if (inp == '+') { // Apply rule 2
-            inp = getInp();
-            Term();
-            Elist();
-        } else if (inp == '-') { // Apply rule 9
-            inp = getInp();
-            Term();
-            Elist();
-        } else if (inp == ')' || index == input.length()) {
-            // Apply rule 3: epsilon production, do nothing
-        } else {
-            reject();
-        }
+        Term();
+        Elist();
     }
 
     void Term() {
-        if (inp == '(' || inp == VAR) { // Apply rule 4
-            Factor();
-            Tlist();
-        } else {
-            reject();
-        }
+        Factor();
+        Tlist();
     }
 
     void Tlist() {
-        if (inp == '*') { // Apply rule 5
-            inp = getInp();
+        if (index < inp.length() && (inp.charAt(index) == '*' || inp.charAt(index) == '/')) {
+            index++;
             Factor();
             Tlist();
-        } else if (inp == '/') { // Apply rule 10
-            inp = getInp();
-            Factor();
-            Tlist();
-        } else if (inp == '+' || inp == '-' || inp == ')' || index == input.length()) {
-            // Apply rule 6: epsilon production, do nothing
-        } else {
-            reject();
         }
     }
 
     void Factor() {
-        if (inp == '(') { // Apply rule 7
-            inp = getInp();
+        if (index < inp.length() && inp.charAt(index) == '(') {
+            index++;
             Expr();
-            if (inp == ')') {
-                inp = getInp();
+            if (index < inp.length() && inp.charAt(index) == ')') {
+                index++;
             } else {
                 reject();
             }
-        } else if (inp == VAR) { // Apply rule 8
-            inp = getInp();
+        } else if (index < inp.length() && Character.isLetter(inp.charAt(index))) {
+            while (index < inp.length() && Character.isLetter(inp.charAt(index))) {
+                index++; 
+            }
         } else {
             reject();
         }
     }
 
-    // Method for printing Accept message
     void accept() {
-        throw new RuntimeException("Accepted"); // Use exception to communicate result
+        throw new RuntimeException ("Input accepted by parser.");
     }
 
-    // Method for printing Reject message
     void reject() {
-        throw new RuntimeException("Rejected"); // Use exception to communicate result
-    }
-
-    // Method for reading the next character of the input string
-    char getInp() {
-        index++;
-        if (index < input.length()) {
-            return input.charAt(index);
-        } else {
-            return '\0'; // End of string
-        }
+        throw new RuntimeException ("Input rejected by parser.");
     }
 }
