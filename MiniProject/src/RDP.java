@@ -3,8 +3,8 @@ class RDP {
     int index;    
 
     public RDP (String inp){
-        this.inp=inp;
-        this.index=0;
+        this.inp = inp;
+        this.index = 0;
     }
 
     public static void main(String[] args) {
@@ -22,7 +22,7 @@ class RDP {
         if (index == inp.length()) {
             accept(); 
         } else {
-            reject(); 
+            reject("Extra characters at the end of the input");
         }
     }
 
@@ -63,22 +63,22 @@ class RDP {
             if (index < inp.length() && inp.charAt(index) == ')') {
                 index++;
             } else {
-                reject();
+                reject("Missing closing parenthesis");
             }
         } else if (index < inp.length() && Character.isLetter(inp.charAt(index))) {
             while (index < inp.length() && Character.isLetter(inp.charAt(index))) {
                 index++; 
             }
         } else {
-            reject();
+            reject("\nInvalid character in input: " + inp.charAt(index));
         }
     }
 
     void accept() {
-        throw new RuntimeException ("Input accepted by parser.");
+        throw new RuntimeException("Input accepted by parser.");
     }
 
-    void reject() {
-        throw new RuntimeException ("Input rejected by parser.");
+    void reject(String message) {
+        throw new RuntimeException("Input rejected by parser: " + message);
     }
 }
